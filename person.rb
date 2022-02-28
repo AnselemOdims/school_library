@@ -14,5 +14,7 @@ class Person
     @name
   end
 
-  
+  def age
+    @age
+  end
 end
