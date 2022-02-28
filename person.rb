@@ -10,4 +10,9 @@ class Person
     @id
   end
 
+  def name
+    @name
+  end
+
+  
 end
