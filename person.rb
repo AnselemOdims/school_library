@@ -6,6 +6,8 @@ class Person
     @parent_permission = parent_permission
   end
 
-  
+  def id
+    @id
+  end
 
 end
