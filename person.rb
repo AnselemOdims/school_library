@@ -21,4 +21,8 @@ class Person
   def name=(value)
     @name = value
   end 
+
+  def age=(value)
+    @age = value
+  end
 end
