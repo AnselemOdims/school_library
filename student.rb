@@ -2,7 +2,7 @@ require_relative './person'
 
 class Student < Person
   def initialize(classroom)
-    super
+    super()
     @classroom = classroom
   end
 
@@ -10,7 +10,3 @@ class Student < Person
     "¯\(ツ)/¯"
   end
 end
-
-john = Student.new('june')
-
-puts john.play_hooky
