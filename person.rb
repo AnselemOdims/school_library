@@ -25,4 +25,10 @@ class Person
   def age=(value)
     @age = value
   end
+
+  def can_use_services?
+    if age >= 18 || parent_permission
+      true
+    end
+  end
 end
