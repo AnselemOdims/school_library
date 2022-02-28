@@ -1,16 +1,12 @@
-require_relative './person.rb'
+require_relative './person'
 
 class Teacher < Person
   def initialize(specialization)
     super
     @specialization = specialization
-  end 
+  end
 
   def can_use_services?
     true
   end
-
 end
-
-minus = Teacher.new("water")
-puts minus.can_use_services?
