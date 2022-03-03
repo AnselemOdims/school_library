@@ -78,7 +78,6 @@ def main
   2.times {|n| puts ''}
   choose
   num = gets.chomp
-
 end
 
 welcome
