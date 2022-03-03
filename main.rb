@@ -24,3 +24,16 @@ def list_people
     end
   end
 end
+
+# create a person
+def create_person(type, name, age, perm)
+  if type == 'student'
+    if perm == 'y'
+      student = Student.new(age, name, true)
+    else
+      student = Student.new(age, name, false)
+    end
+  else 
+    teacher = Teacher.new(perm, age, name)
+  end
+end
