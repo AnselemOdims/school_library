@@ -50,3 +50,8 @@ def create_rental(date, person_id, book_id)
   rental = Rental.new(date, book.title, book.author)
   person.add_rental(rental)
 end
+
+# list all rentals for a given person ID
+def list_rental(id)
+  Person.all.find_all{|person| person.id == id.to_i}
+end
