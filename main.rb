@@ -37,3 +37,10 @@ def create_person(type, name, age, perm)
     teacher = Teacher.new(perm, age, name)
   end
 end
+
+# create a book
+def create_book(title, author)
+  book = Book.new(title, author)
+end
+
+
