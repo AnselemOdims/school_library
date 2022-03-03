@@ -62,7 +62,7 @@ def welcome
 end
 
 # display a list of options
-def choose 
+def choose
   puts "Please choose an option by entering a number: "
   puts "1 - List all books"
   puts "2 - List all people"
@@ -72,3 +72,14 @@ def choose
   puts "6 - List all of rentals for a given person id"
   puts "7 - Exit"
 end 
+
+# define the entry point method
+def main
+  2.times {|n| puts ''}
+  choose
+  num = gets.chomp
+
+end
+
+welcome
+main
