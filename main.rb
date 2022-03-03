@@ -78,6 +78,80 @@ def main
   2.times {|n| puts ''}
   choose
   num = gets.chomp
+  if num == '1'
+    list_books
+    main
+  elsif num == '2'
+    list_people
+    main
+  elsif num == '3'
+    print "Do you want to create a student (1) or a teacher (2)? [Input the number]: "
+    option = gets.chomp
+    if option == '1'
+      print "Age: "
+      age = gets.chomp
+      print 'Name: '
+      name = gets.chomp
+      print 'Has parent permission? [Y/N]: '
+      permission = gets.chomp
+      create_person('student', name, age, permission)
+      puts "Person created successfully"
+      main
+    else 
+      print "Age: "
+      age = gets.chomp
+      print 'Name: '
+      name = gets.chomp
+      print 'Specialization: '
+      specialization = gets.chomp
+      create_person('teacher', name, age, specialization)
+      puts "Person created successfully"
+      main
+    end
+  elsif num == '4'
+      print 'Title: '
+      title = gets.chomp
+      print 'Author: '
+      author = gets.chomp
+      create_book(title, author)
+      puts "Book created successfully"
+      main
+  elsif num == '5'
+      books = Book.all
+      if books.empty?
+      puts "No books added yet. Please add books to shelf"
+      else
+        puts 'Select a book from the following list by number '
+        books.each_with_index do |book, ind|
+          puts "#{ind}) Title: \"#{book.title}\", Author: #{book.author}"
+        end
+        book_id = gets.chomp
+        puts 'Select a person from the following list by number (not id)'
+        people = Person.all
+        people.each_with_index do |person, ind| 
+          puts "#{ind}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+        end
+        person_id = gets.chomp
+        print 'Date: '
+        date = gets.chomp
+        create_rental(date, person_id, book_id)
+        puts 'Rental created successfully'
+      end
+      main
+  elsif num == '6'
+    print 'ID of person: '
+    id = gets.chomp
+    puts 'Rentals: '
+    rentals = list_rental(id)
+    rentals.each do |rental|
+      rental.rentals.each do |rent|
+        puts "Date: #{rent.date}, Book: \"#{rent.book}\" by #{rent.person}"
+      end
+    end
+    main
+  else
+    return
+  end
 end
 
 welcome
