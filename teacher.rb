@@ -2,6 +2,7 @@ require_relative './person'
 
 class Teacher < Person
   attr_reader :specialization
+
   @@teachers = []
 
   def initialize(specialization, age, name = 'Unknown')

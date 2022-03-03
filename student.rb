@@ -2,9 +2,10 @@ require_relative './person'
 
 class Student < Person
   attr_accessor :classroom
+
   @@students = []
 
-  def initialize(age, name = 'Unknown', parent_permission= true, *classroom)
+  def initialize(age, name = 'Unknown', parent_permission = true, *classroom)
     super(age, name, parent_permission: parent_permission)
     @classroom = classroom
     @@students << self
@@ -18,4 +19,3 @@ class Student < Person
     @@students
   end
 end
-

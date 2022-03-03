@@ -3,6 +3,7 @@ require_relative './corrector'
 class Person
   attr_accessor :name, :age
   attr_reader :id, :rentals
+
   @@people = []
 
   def initialize(age, name = 'Unknown', parent_permission: true)
@@ -28,7 +29,11 @@ class Person
   end
 
   def self.all
-    @@people
+    subclasses = []
+    ObjectSpace.each_object(Person) do |sub|
+      subclasses << sub if sub.ancestors.include? self
+    end 
+    subclasses
   end
 
   private
