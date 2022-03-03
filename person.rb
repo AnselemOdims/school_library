@@ -3,6 +3,7 @@ require_relative './corrector'
 class Person
   attr_accessor :name, :age
   attr_reader :id, :rentals
+  @@people = []
 
   def initialize(age, name = 'Unknown', parent_permission: true)
     @id = Random.rand(1..500)
@@ -11,6 +12,7 @@ class Person
     @parent_permission = parent_permission
     @corrector = Corrector.new
     @rentals = []
+    @@people << self
   end
 
   def can_use_services?
@@ -25,9 +27,13 @@ class Person
     @rentals << rental
   end
 
+  def self.all
+    @@people
+  end
+
   private
 
   def of_age?
-    @age >= 18
+    @age.to_i >= 18
   end
 end
