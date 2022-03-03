@@ -4,8 +4,6 @@ class Person
   attr_accessor :name, :age
   attr_reader :id, :rentals
 
-  @@people = []
-
   def initialize(age, name = 'Unknown', parent_permission: true)
     @id = Random.rand(1..500)
     @name = name
@@ -13,7 +11,6 @@ class Person
     @parent_permission = parent_permission
     @corrector = Corrector.new
     @rentals = []
-    @@people << self
   end
 
   def can_use_services?
@@ -31,8 +28,8 @@ class Person
   def self.all
     subclasses = []
     ObjectSpace.each_object(Person) do |sub|
-      subclasses << sub if sub.ancestors.include? self
-    end 
+      subclasses << sub
+    end
     subclasses
   end
 
