@@ -43,4 +43,10 @@ def create_book(title, author)
   book = Book.new(title, author)
 end
 
-
+# create a rental
+def create_rental(date, person_id, book_id)
+  book = Book.all[book_id.to_i]
+  person = Person.all[person_id.to_i]
+  rental = Rental.new(date, book.title, book.author)
+  person.add_rental(rental)
+end
