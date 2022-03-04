@@ -94,7 +94,6 @@ def list_rental
   print 'ID of person: '
   id = gets.chomp
   puts 'Rentals: '
-  rentals = Person.all.find_all { |person| person.id == id.to_i }
   rentals.each do |rental|
     rental.rentals.each do |rent|
       puts "Date: #{rent.date}, Book: \"#{rent.book}\" by #{rent.person}"
