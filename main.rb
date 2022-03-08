@@ -7,35 +7,6 @@ require_relative './rental'
 require_relative './list_items'
 require_relative './create'
 
-# # create a person
-# def create_person
-#   print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
-#   option = gets.chomp
-#   print 'Age: '
-#   age = gets.chomp
-#   print 'Name: '
-#   name = gets.chomp
-#   if option == '1'
-#     print 'Has parent permission? [Y/N]: '
-#     permission = gets.chomp
-#     Student.new(age, name, permission)
-#   else
-#     print 'Specialization: '
-#     specialization = gets.chomp
-#     Teacher.new(specialization, age, name)
-#   end
-#   puts 'Person created successfully'
-# end
-
-# create a book
-def create_book
-  print 'Title: '
-  title = gets.chomp
-  print 'Author: '
-  author = gets.chomp
-  Book.new(title, author)
-  puts 'Book created successfully'
-end
 
 def add_rental(date, book_id, person_id)
   book = Book.all[book_id]

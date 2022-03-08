@@ -1,5 +1,6 @@
 require_relative './teacher'
 require_relative './student'
+require_relative './book'
 
 module Create
   def create_person
@@ -19,5 +20,14 @@ module Create
       Teacher.new(specialization, age, name)
     end
     puts 'Person created successfully'
+  end
+
+  def create_book
+    print 'Title: '
+    title = gets.chomp
+    print 'Author: '
+    author = gets.chomp
+    Book.new(title, author)
+    puts 'Book created successfully'
   end
 end
