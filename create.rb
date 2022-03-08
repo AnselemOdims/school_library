@@ -4,6 +4,7 @@ require_relative './book'
 
 module Create
   def create_person
+    persons = JSON.parse(File.read('persons.json'))
     print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
     option = gets.chomp
     print 'Age: '
@@ -12,12 +13,25 @@ module Create
     name = gets.chomp
     if option == '1'
       print 'Has parent permission? [Y/N]: '
-      permission = gets.chomp
-      Student.new(age, name, permission)
+      permission = gets.chomp.upcase
+      student = Student.new(age, name)
+      student.type = 'Student'
+      if(permission === 'Y')
+        student.parent_permission = true
+      elsif(permission === 'N')
+        student.parent_permission = false
+      else
+        puts "Not sure what to do with that"
+      end
+      persons << { "type" => student.type, "name" => student.name, "age" => student.age, 'parent_permission' => student.parent_permission}
+      File.write('persons.json', JSON.generate(persons))
     else
       print 'Specialization: '
       specialization = gets.chomp
-      Teacher.new(specialization, age, name)
+      teacher = Teacher.new(specialization, age, name)
+      teacher.type = 'Teacher'
+      persons << { 'type' => teacher.type, "name" => teacher.name, "age" => teacher.age, 'specialization' => teacher.specialization}
+      File.write('persons.json', JSON.generate(persons))
     end
     puts 'Person created successfully'
   end

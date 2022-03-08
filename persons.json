@@ -1,1 +1,10 @@
-[]
+[
+	{ "type": "Student", "name": "John", "age": "20", "parent_permission": true },
+	{
+		"type": "Teacher",
+		"name": "Kiba ",
+		"age": "35",
+		"specialization": "FItness"
+	},
+	{ "type": "Student", "name": "John", "age": "20", "parent_permission": true }
+]
