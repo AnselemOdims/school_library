@@ -50,7 +50,10 @@ module Create
     title = gets.chomp
     print 'Author: '
     author = gets.chomp
-    Book.new(title, author)
+    book = Book.new(title, author)
+    books = JSON.parse(File.read('books.json'))
+    books << { 'title' => book.title, 'author' => book.author}
+    File.write('books.json', JSON.generate(books))
     puts 'Book created successfully'
   end
 
