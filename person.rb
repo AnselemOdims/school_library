@@ -26,14 +26,6 @@ class Person
     @rentals << rental
   end
 
-  def self.all
-    subclasses = []
-    ObjectSpace.each_object(Person) do |sub|
-      subclasses << sub
-    end
-    subclasses
-  end
-
   private
 
   def of_age?

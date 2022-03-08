@@ -16,7 +16,7 @@ module Create
       else
         puts "Not sure what to do with that"
       end
-      persons << { "type" => student.type, "name" => student.name, "age" => student.age, 'parent_permission' => student.parent_permission}
+      persons << { "type" => student.type, "name" => student.name, "age" => student.age, 'parent_permission' => student.parent_permission, 'rentals' => student.rentals}
       File.write('persons.json', JSON.generate(persons))
   end
 
@@ -57,11 +57,13 @@ module Create
     puts 'Book created successfully'
   end
 
-  def add_rental(date, book_id, person_id)
-    book = JSON.parse(File.read('books.json'))[book_id]
-    person = JSON.parse(File.read('perons.json'))[person_id]
-    rental = Rental.new(date, book.title, book.author)
-    person.add_rental(rental)
+  def add_rental(date, book_ind, person_ind)
+    rentals = JSON.parse(File.read('rentals.json'))
+    book = JSON.parse(File.read('books.json'))[book_ind]
+    person = JSON.parse(File.read('persons.json'))[person_ind]
+    rental = Rental.new(date, book, person)
+    rentals << { 'date' => rental.date, 'book' => rental.book, 'person' => rental.person }
+    File.write('rentals.json', JSON.generate(rentals))
   end
 
   def create_rental
@@ -74,17 +76,17 @@ module Create
     else
       puts 'Select a book from the following list by number '
       books.each_with_index do |book, ind|
-        puts "#{ind}) Title: \"#{book.title}\", Author: #{book.author}"
+        puts "#{ind}) Title: \"#{book['title']}\", Author: #{book['author']}"
       end
       book_id = gets.chomp.to_i
       puts 'Select a person from the following list by number (not id) '
       persons.each_with_index do |person, ind|
-        puts "#{ind}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+        puts "#{ind}) [#{person['type']}] Name: #{person['name']}, ID: #{person['id']}, Age: #{person['age']}"
       end
-      person_id = gets.chomp.to_i
+      person_ind = gets.chomp.to_i
       print 'Date: '
       date = gets.chomp
-      add_rental(date, book_id, person_id)
+      add_rental(date, book_id, person_ind)
       puts 'Rental created successfully'
     end
   end

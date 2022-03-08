@@ -1,0 +1,22 @@
+[
+	{
+		"date": "2022/02/02",
+		"book": { "title": "RIta my baby", "author": "Anselem" },
+		"person": {
+			"type": "Teacher",
+			"name": "Kiba",
+			"age": "35",
+			"specialization": "Fitness"
+		}
+	},
+	{
+		"date": "2022/03/0",
+		"book": { "title": "John is fine", "author": "Jande Doe" },
+		"person": {
+			"type": "Student",
+			"name": "John",
+			"age": "20",
+			"parent_permission": true
+		}
+	}
+]
