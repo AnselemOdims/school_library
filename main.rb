@@ -7,38 +7,6 @@ require_relative './rental'
 require_relative './list_items'
 require_relative './create'
 
-
-def add_rental(date, book_id, person_id)
-  book = Book.all[book_id]
-  person = Person.all[person_id]
-  rental = Rental.new(date, book.title, book.author)
-  person.add_rental(rental)
-end
-
-# create a rental
-def create_rental
-  if Book.all.empty?
-    puts 'No books added yet. Please add books to shelf'
-  elsif Person.all.empty?
-    puts 'No people added yet. Please create a new person'
-  else
-    puts 'Select a book from the following list by number '
-    Book.all.each_with_index do |book, ind|
-      puts "#{ind}) Title: \"#{book.title}\", Author: #{book.author}"
-    end
-    book_id = gets.chomp.to_i
-    puts 'Select a person from the following list by number (not id) '
-    Person.all.each_with_index do |person, ind|
-      puts "#{ind}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-    end
-    person_id = gets.chomp.to_i
-    print 'Date: '
-    date = gets.chomp
-    add_rental(date, book_id, person_id)
-    puts 'Rental created successfully'
-  end
-end
-
 # list all rentals for a given person ID
 def list_rental
   print 'ID of person: '
