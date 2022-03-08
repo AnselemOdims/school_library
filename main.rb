@@ -5,38 +5,27 @@ require_relative './teacher'
 require_relative './student'
 require_relative './rental'
 require_relative './list_items'
+require_relative './create'
 
-# list all people
-# def list_people
-#   people = Person.all
-#   if people.empty?
-#     puts 'No person available. Please add  teacher or student'
+# # create a person
+# def create_person
+#   print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
+#   option = gets.chomp
+#   print 'Age: '
+#   age = gets.chomp
+#   print 'Name: '
+#   name = gets.chomp
+#   if option == '1'
+#     print 'Has parent permission? [Y/N]: '
+#     permission = gets.chomp
+#     Student.new(age, name, permission)
 #   else
-#     people.each do |person|
-#       puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-#     end
+#     print 'Specialization: '
+#     specialization = gets.chomp
+#     Teacher.new(specialization, age, name)
 #   end
+#   puts 'Person created successfully'
 # end
-
-# create a person
-def create_person
-  print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
-  option = gets.chomp
-  print 'Age: '
-  age = gets.chomp
-  print 'Name: '
-  name = gets.chomp
-  if option == '1'
-    print 'Has parent permission? [Y/N]: '
-    permission = gets.chomp
-    Student.new(age, name, permission)
-  else
-    print 'Specialization: '
-    specialization = gets.chomp
-    Teacher.new(specialization, age, name)
-  end
-  puts 'Person created successfully'
-end
 
 # create a book
 def create_book
@@ -119,6 +108,7 @@ def list(entity)
 end
 
 def select_option(num)
+ include Create
   case num
   when '1'
     list('books')
