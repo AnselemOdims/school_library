@@ -16,7 +16,7 @@ module Create
       else
         puts "Not sure what to do with that"
       end
-      persons << { "type" => student.type, "name" => student.name, "age" => student.age, 'parent_permission' => student.parent_permission, 'rentals' => student.rentals}
+      persons << { 'id' => student.id, "type" => student.type, "name" => student.name, "age" => student.age, 'parent_permission' => student.parent_permission, 'rentals' => student.rentals}
       File.write('persons.json', JSON.generate(persons))
   end
 
@@ -25,7 +25,7 @@ module Create
     specialization = gets.chomp
     teacher = Teacher.new(specialization, age, name)
     teacher.type = 'Teacher'
-    persons << { 'type' => teacher.type, "name" => teacher.name, "age" => teacher.age, 'specialization' => teacher.specialization}
+    persons << { 'id' => teacher.id,'type' => teacher.type, "name" => teacher.name, "age" => teacher.age, 'specialization' => teacher.specialization, 'rentals' => teacher.rentals}
     File.write('persons.json', JSON.generate(persons))
   end
 
@@ -59,10 +59,15 @@ module Create
 
   def add_rental(date, book_ind, person_ind)
     rentals = JSON.parse(File.read('rentals.json'))
+    persons = JSON.parse(File.read('persons.json'))
     book = JSON.parse(File.read('books.json'))[book_ind]
-    person = JSON.parse(File.read('persons.json'))[person_ind]
+    person = persons[person_ind]
     rental = Rental.new(date, book, person)
     rentals << { 'date' => rental.date, 'book' => rental.book, 'person' => rental.person }
+    persons_arr = persons.each do |item|
+      item['id'] == person['id'] && item['rentals'] << { 'date' => rental.date, 'title' => rental.book['title'], 'author' => rental.book['author'] }
+    end
+    File.write('persons.json', JSON.generate(persons_arr))
     File.write('rentals.json', JSON.generate(rentals))
   end
 

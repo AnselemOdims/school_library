@@ -7,18 +7,6 @@ require_relative './rental'
 require_relative './list_items'
 require_relative './create'
 
-# list all rentals for a given person ID
-def list_rental
-  print 'ID of person: '
-  id = gets.chomp
-  puts 'Rentals: '
-  rentals = Person.all.find_all { |person| person.id == id.to_i }
-  rentals.each do |rental|
-    rental.rentals.each do |rent|
-      puts "Date: #{rent.date}, Book: \"#{rent.book}\" by #{rent.person}"
-    end
-  end
-end
 
 # display welcome message
 def welcome
@@ -48,6 +36,7 @@ end
 
 def select_option(num)
  include Create
+include List
   case num
   when '1'
     list('books')

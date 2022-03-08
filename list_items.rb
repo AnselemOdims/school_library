@@ -22,4 +22,14 @@ module List
       end
     end
   end
+
+  # list all rentals for a given person ID
+  def list_rental
+    print 'ID of person: '
+    id = gets.chomp.to_i
+    puts 'Rentals: '
+    rentals = JSON.parse(File.read('persons.json')).find { |person| person['id'] == id }['rentals']
+    rentals.each { |rental| puts "Date: #{rental['date']}, Book: \"#{rental['title']}\" by #{rental['author']}"}
+  end
+    
 end

@@ -1,15 +1,36 @@
 [
-	{ "type": "Student", "name": "John", "age": "20", "parent_permission": true },
 	{
+		"id": 374,
+		"type": "Student",
+		"name": "John",
+		"age": "20",
+		"parent_permission": true,
+		"rentals": [
+			{ "date": "2021/02/02", "title": "John is fine", "author": "Jane Doe" },
+			{
+				"date": "2019/02/02",
+				"title": "Let me live my life",
+				"author": "Anselem"
+			}
+		]
+	},
+	{
+		"id": 183,
 		"type": "Teacher",
 		"name": "Kiba",
 		"age": "35",
-		"specialization": "Fitness"
-	},
-	{
-		"type": "Student",
-		"name": "Bonnie",
-		"age": "20",
-		"parent_permission": true
+		"specialization": "Fitness",
+		"rentals": [
+			{
+				"date": "2022/02/02",
+				"title": "Let me live my life",
+				"author": "Anselem"
+			},
+			{
+				"date": "2022/05/03",
+				"title": "Let me live my life",
+				"author": "Anselem"
+			}
+		]
 	}
 ]

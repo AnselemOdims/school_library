@@ -1,1 +1,4 @@
-[{"title":"John is fine","author":"Jande Doe"},{"title":"RIta my baby","author":"Anselem"}]
+[
+	{ "title": "John is fine", "author": "Jane Doe" },
+	{ "title": "Let me live my life", "author": "Anselem" }
+]
