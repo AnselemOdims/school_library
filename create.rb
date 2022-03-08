@@ -3,16 +3,9 @@ require_relative './student'
 require_relative './book'
 
 module Create
-  def create_person
-    persons = JSON.parse(File.read('persons.json'))
-    print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
-    option = gets.chomp
-    print 'Age: '
-    age = gets.chomp
-    print 'Name: '
-    name = gets.chomp
-    if option == '1'
-      print 'Has parent permission? [Y/N]: '
+
+  def create_student(persons, age, name)
+    print 'Has parent permission? [Y/N]: '
       permission = gets.chomp.upcase
       student = Student.new(age, name)
       student.type = 'Student'
@@ -25,13 +18,29 @@ module Create
       end
       persons << { "type" => student.type, "name" => student.name, "age" => student.age, 'parent_permission' => student.parent_permission}
       File.write('persons.json', JSON.generate(persons))
+  end
+
+  def create_teacher(persons, age, name)
+    print 'Specialization: '
+    specialization = gets.chomp
+    teacher = Teacher.new(specialization, age, name)
+    teacher.type = 'Teacher'
+    persons << { 'type' => teacher.type, "name" => teacher.name, "age" => teacher.age, 'specialization' => teacher.specialization}
+    File.write('persons.json', JSON.generate(persons))
+  end
+
+  def create_person
+    persons = JSON.parse(File.read('persons.json'))
+    print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
+    option = gets.chomp
+    print 'Age: '
+    age = gets.chomp
+    print 'Name: '
+    name = gets.chomp
+    if option == '1'
+      create_student(persons, age, name)
     else
-      print 'Specialization: '
-      specialization = gets.chomp
-      teacher = Teacher.new(specialization, age, name)
-      teacher.type = 'Teacher'
-      persons << { 'type' => teacher.type, "name" => teacher.name, "age" => teacher.age, 'specialization' => teacher.specialization}
-      File.write('persons.json', JSON.generate(persons))
+      create_teacher(persons, age, name)
     end
     puts 'Person created successfully'
   end

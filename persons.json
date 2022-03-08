@@ -2,9 +2,14 @@
 	{ "type": "Student", "name": "John", "age": "20", "parent_permission": true },
 	{
 		"type": "Teacher",
-		"name": "Kiba ",
+		"name": "Kiba",
 		"age": "35",
-		"specialization": "FItness"
+		"specialization": "Fitness"
 	},
-	{ "type": "Student", "name": "John", "age": "20", "parent_permission": true }
+	{
+		"type": "Student",
+		"name": "Bonnie",
+		"age": "20",
+		"parent_permission": true
+	}
 ]
