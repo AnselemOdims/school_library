@@ -1,4 +1,3 @@
-
 require_relative './book'
 require_relative './person'
 require_relative './teacher'
@@ -7,14 +6,13 @@ require_relative './rental'
 require_relative './list_items'
 require_relative './create'
 
-
 # display welcome message
 def welcome
   puts 'Welcome to School Library App!'
 end
 
 # display a list of options
-def choose
+def choices
   puts 'Please choose an option by entering a number: ',
        '1 - List all books',
        '2 - List all people',
@@ -25,23 +23,16 @@ def choose
        '7 - Exit'
 end
 
-def list(entity)
-  include List
-  if entity == 'books'
-    list_books
-  else
-    list_people
-  end
-end
-
+# rubocop:disable Style/MixinUsage
+# method to select option
 def select_option(num)
- include Create
-include List
+  include Create
+  include List
   case num
   when '1'
-    list('books')
+    list_books
   when '2'
-    list('people')
+    list_people
   when '3'
     create_person
   when '4'
@@ -54,11 +45,12 @@ include List
     puts 'Oooopss!! it seems you selected a wrong option. Please try again'
   end
 end
+# rubocop:enable Style/MixinUsage
 
 # define the entry point method
 def main
   2.times { |_n| puts '' }
-  choose
+  choices
   num = gets.chomp
   if num == '7'
     puts 'Thank you for using our service :). We hope to get your feedback soon'

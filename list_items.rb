@@ -1,6 +1,7 @@
 require 'json'
 
 module List
+  # list all books
   def list_books
     books = JSON.parse(File.read('books.json'))
     if books.empty?
@@ -12,6 +13,7 @@ module List
     end
   end
 
+  # list all people
   def list_people
     people = JSON.parse(File.read('persons.json'))
     if people.empty?
@@ -29,7 +31,10 @@ module List
     id = gets.chomp.to_i
     puts 'Rentals: '
     rentals = JSON.parse(File.read('persons.json')).find { |person| person['id'] == id }['rentals']
-    rentals.each { |rental| puts "Date: #{rental['date']}, Book: \"#{rental['title']}\" by #{rental['author']}"}
+    if rentals.empty?
+      puts "Person with ID #{id} has no rentals yet"
+    else
+      rentals.each { |rental| puts "Date: #{rental['date']}, Book: \"#{rental['title']}\" by #{rental['author']}" }
+    end
   end
-    
 end

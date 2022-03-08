@@ -3,21 +3,22 @@ require_relative './student'
 require_relative './book'
 
 module Create
-
   def create_student(persons, age, name)
     print 'Has parent permission? [Y/N]: '
-      permission = gets.chomp.upcase
-      student = Student.new(age, name)
-      student.type = 'Student'
-      if(permission === 'Y')
-        student.parent_permission = true
-      elsif(permission === 'N')
-        student.parent_permission = false
-      else
-        puts "Not sure what to do with that"
-      end
-      persons << { 'id' => student.id, "type" => student.type, "name" => student.name, "age" => student.age, 'parent_permission' => student.parent_permission, 'rentals' => student.rentals}
-      File.write('persons.json', JSON.generate(persons))
+    permission = gets.chomp.upcase
+    student = Student.new(age, name)
+    student.type = 'Student'
+    case permission
+    when 'Y'
+      student.parent_permission = true
+    when 'N'
+      student.parent_permission = false
+    else
+      puts 'Not sure what to do with that'
+    end
+    persons << { 'id' => student.id, 'type' => student.type, 'name' => student.name, 'age' => student.age,
+                 'parent_permission' => student.parent_permission, 'rentals' => student.rentals }
+    File.write('persons.json', JSON.generate(persons))
   end
 
   def create_teacher(persons, age, name)
@@ -25,7 +26,8 @@ module Create
     specialization = gets.chomp
     teacher = Teacher.new(specialization, age, name)
     teacher.type = 'Teacher'
-    persons << { 'id' => teacher.id,'type' => teacher.type, "name" => teacher.name, "age" => teacher.age, 'specialization' => teacher.specialization, 'rentals' => teacher.rentals}
+    persons << { 'id' => teacher.id, 'type' => teacher.type, 'name' => teacher.name, 'age' => teacher.age,
+                 'specialization' => teacher.specialization, 'rentals' => teacher.rentals }
     File.write('persons.json', JSON.generate(persons))
   end
 
@@ -52,7 +54,7 @@ module Create
     author = gets.chomp
     book = Book.new(title, author)
     books = JSON.parse(File.read('books.json'))
-    books << { 'title' => book.title, 'author' => book.author}
+    books << { 'title' => book.title, 'author' => book.author }
     File.write('books.json', JSON.generate(books))
     puts 'Book created successfully'
   end
@@ -65,19 +67,27 @@ module Create
     rental = Rental.new(date, book, person)
     rentals << { 'date' => rental.date, 'book' => rental.book, 'person' => rental.person }
     persons_arr = persons.each do |item|
-      item['id'] == person['id'] && item['rentals'] << { 'date' => rental.date, 'title' => rental.book['title'], 'author' => rental.book['author'] }
+      item['id'] == person['id'] && (item['rentals'] << { 'date' => rental.date, 'title' => rental.book['title'],
+                                                          'author' => rental.book['author'] })
     end
     File.write('persons.json', JSON.generate(persons_arr))
     File.write('rentals.json', JSON.generate(rentals))
   end
 
+  def check(books, persons)
+    if books.empty?
+      puts 'No books added yet. Please add books to shelf'
+    else
+      persons.empty?
+      puts 'No people added yet. Please create a new person'
+    end
+  end
+
   def create_rental
     books = JSON.parse(File.read('books.json'))
     persons = JSON.parse(File.read('persons.json'))
-    if books.empty?
-      puts 'No books added yet. Please add books to shelf'
-    elsif persons.empty?
-      puts 'No people added yet. Please create a new person'
+    if books.empty? || persons.empty?
+      check(books, persons)
     else
       puts 'Select a book from the following list by number '
       books.each_with_index do |book, ind|
